@@ -10,21 +10,25 @@ var $sections = $('.section');
 var winHeight = $win.height();
 var index = 0;
 var sectionNum = $sections.length;
+var tId;
 
 initSection();
 
 $win.keydown(function (e) {
     if (e.which == 38 && index > 0){
-        slideAnimation('up', function () {
-            console.log("uo");
-        });
+        $('.second-title').remove();
+        slideAnimation('up', slideEnd);
     }else if(e.which == 40 && index < 3 ){
-        slideAnimation('down');
+        $('.second-title').remove();
+        slideAnimation('down',slideEnd);
     }
 });
 $win.on('resize', function () {
-    winHeight = $win.height();
-    initSection();
+    throttle(function () {
+        winHeight = $win.height();
+        initSection();
+    }, 500);        $slider.animate({top: - index * winHeight} , 300);
+
 });
 function initSection() {
     $sectionContainer.height(winHeight);
@@ -41,10 +45,22 @@ function slideAnimation(direction, callback) {
         sliderDistance = -winHeight;
         index = index + 1;
     }
-    $slider.animate({top: '+=' +  sliderDistance}, 300, function () {
-        console.log($slider.position().top);
+    $slider.animate({top: '+=' +  sliderDistance}, 400, function () {
         if (callback){
             callback();
         }
     });
 }
+function throttle(method, delay){
+    clearTimeout(tId);
+    tId=setTimeout(function(){
+        method();
+    }, delay);
+}
+
+function slideEnd() {
+    var content = "<h5 class='second-title'>第" + (index + 1) + "屏的回调函数执行效果";
+    $sections.eq(index).append(content);
+}
+
+

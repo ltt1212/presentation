@@ -6,6 +6,8 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+    color: white;
+
 }
 .slider{
     position: absolute;
@@ -13,5 +15,8 @@
 }
 .section{
     width: 100%;
+}
+.second-title{
+    position: relative;
 }
 
