@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.section-container{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.slider{
+    position: absolute;
+    width: 100%;
+}
+.section{
+    width: 100%;
+}
+
